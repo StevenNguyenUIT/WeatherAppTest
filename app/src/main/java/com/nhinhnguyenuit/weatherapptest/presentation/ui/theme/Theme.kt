@@ -1,4 +1,4 @@
-package com.nhinhnguyenuit.weatherapptest.ui.theme
+package com.nhinhnguyenuit.weatherapptest.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

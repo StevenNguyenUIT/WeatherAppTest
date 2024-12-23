@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -66,4 +67,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //add dependence for compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    //add dependence for retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //add dependence for koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
+    //add dependence for datastore
+    implementation(libs.androidx.datastore.preferences)
+
+
+
 }
