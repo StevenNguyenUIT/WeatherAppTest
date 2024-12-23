@@ -1,4 +1,4 @@
-package com.nhinhnguyenuit.weatherapptest.presentation.ui.theme
+package com.nhinhnguyenuit.weatherapptest.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.nhinhnguyenuit.weatherapptest.presentation.ui.theme.WeatherAppTestTheme
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
+import com.nhinhnguyenuit.weatherapptest.presentation.ui.HomeScreen
+import com.nhinhnguyenuit.weatherapptest.presentation.viewmodel.WeatherViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,16 +19,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTestTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val viewModel = koinViewModel<WeatherViewModel>()
+                HomeScreen(viewModel = viewModel)
             }
         }
     }
 }
+
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    val viewModel: WeatherViewModel = koinViewModel()
+//                    HomeScreen(viewModel = viewModel)
+//                }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
