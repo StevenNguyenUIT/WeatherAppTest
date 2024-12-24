@@ -8,14 +8,14 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,11 +31,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
 import com.nhinhnguyenuit.weatherapptest.presentation.viewmodel.WeatherViewModel
 
 @Composable
@@ -66,34 +69,33 @@ fun HomeScreen(viewModel: WeatherViewModel) {
         )
         // If weather is not loaded, show a loading message
         if (!isSearching && weather == null) {
+            // If weather is not loaded, show a loading message
             LoadingScreen(modifier = Modifier.weight(1f))
         } else if (!isSearching) {
             // Display the weather details for the selected city
+            Spacer(modifier = Modifier.height(30.dp))
             FragmentLoadingBasicInfo(weather)
+            Spacer(modifier = Modifier.height(30.dp))
             FragmentLoadingMoreInfo(weather)
         } else if (weather != null) {
             // if can search city, show a basic information
             Spacer(modifier = Modifier.height(30.dp))
             FragmentSearchingBasicInfo(weather)
-        } else {
-            Text(text = "Not found")
-        }
+        } else {}
     }
 }
 
 @Composable
 private fun FragmentSearchingBasicInfo(weather: Weather?) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(0.9f)
-            .height(117.dp),
+        modifier = Modifier.height(117.dp).fillMaxWidth(0.9f),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFF2F2F2)
         ),
         shape = RoundedCornerShape(16.dp)
     ) {
         Row(
-            Modifier.width(336.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -108,19 +110,26 @@ private fun FragmentSearchingBasicInfo(weather: Weather?) {
                     style = TextStyle(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
-                        )
-                )
-                //degree
-                Text(
-                    text = "${weather?.temperature?.toInt()}\u00B0", style = TextStyle(
-                        fontSize = 60.sp
                     )
                 )
+                //degree
+                Row {
+                    Text(
+                        text = "${weather?.temperature?.toInt()}", style = TextStyle(
+                            fontSize = 60.sp
+                        )
+                    )
+                    Text(
+                        text = "\u00B0", style = TextStyle(
+                            fontSize = 30.sp
+                        )
+                    )
+                }
             }
             //image
             AsyncImage(
                 model = "https:${weather?.icon}", contentDescription = "image",
-                modifier = Modifier.size(123.dp)
+                modifier = Modifier.size(83.dp)
             )
         }
 
@@ -143,30 +152,40 @@ private fun FragmentLoadingMoreInfo(weather: Weather?) {
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Humidity", style = TextStyle(fontSize = 12.sp))
-                Text(
-                    text = "${weather?.humidity}%",
-                    style = TextStyle(fontSize = 15.sp)
-                )
-            }
-            Column {
-                Text(text = "UV", style = TextStyle(fontSize = 12.sp))
-                Text(
-                    text = "${weather?.uvIndex?.toInt()}",
-                    style = TextStyle(fontSize = 15.sp)
-                )
-            }
-            Column {
-                Text(text = "Feels Like", style = TextStyle(fontSize = 8.sp))
-                Text(
-                    text = "${weather?.feelsLike?.toInt()}\u00B0",
-                    style = TextStyle(fontSize = 15.sp)
-                )
-            }
+            Item(label = "Humidity", content = weather?.humidity, addingContent = "%")
+            Item(label = "UV", content = weather?.uvIndex?.toInt())
+            Item(label = "Feels Like", fontLabel = 8.sp, content = weather?.feelsLike?.toInt(), addingContent = "\u00B0")
         }
+    }
+}
+
+@Composable
+private fun Item(
+    label: String,
+    fontLabel: TextUnit = 12.sp,
+    colorLabel: Color = Color(0xFFC4C4C4),
+    content: Int?,
+    fontContent: TextUnit = 15.sp,
+    colorContent: Color = Color(0xFF9A9A9A),
+    addingContent: String = ""
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .padding(vertical = 10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(
+            text = label,
+            color = colorLabel,
+            style = TextStyle(fontSize = fontLabel)
+        )
+        Text(
+            text = "$content$addingContent",
+            color = colorContent,
+            style = TextStyle(fontSize = fontContent)
+        )
     }
 }
 
@@ -183,7 +202,8 @@ private fun FragmentLoadingBasicInfo(weather: Weather?) {
         )
         //city
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(20.dp)
         ) {
             Text(
                 text = "${weather?.city}", style = TextStyle(
@@ -192,15 +212,25 @@ private fun FragmentLoadingBasicInfo(weather: Weather?) {
                 )
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Icon(painter = painterResource(id = R.drawable.arrowcustom), contentDescription = "png",
-                modifier = Modifier.size(21.dp))
+            Icon(
+                painter = painterResource(id = R.drawable.arrowcustom), contentDescription = "png",
+                modifier = Modifier.size(21.dp)
+            )
         }
         //degree
-        Text(
-            text = "${weather?.temperature?.toInt()}\u00B0", style = TextStyle(
-                fontSize = 70.sp
+        Row {
+            Text(
+                text = "${weather?.temperature?.toInt()}", style = TextStyle(
+                    fontSize = 70.sp
+                )
             )
-        )
+            Text(
+                text = "\u00B0", style = TextStyle(
+                    fontSize = 40.sp
+                )
+            )
+        }
+
     }
 }
 
@@ -213,11 +243,68 @@ private fun LoadingScreen(modifier: Modifier) {
     ) {
         Text(
             text = stringResource(R.string.no_city_selected),
-            fontSize = 30.sp,
+            style = MaterialTheme.typography.displayLarge,
+            modifier = Modifier.padding(20.dp)
         )
         Text(
             text = stringResource(R.string.please_search_for_a_city),
-            fontSize = 15.sp,
+            style = MaterialTheme.typography.displayMedium
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun previewNotify() {
+    WeatherAppTestTheme {
+        LoadingScreen(modifier = Modifier.padding(50.dp))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLoading() {
+    WeatherAppTestTheme {
+        FragmentLoadingBasicInfo(
+            weather = Weather(
+                city = "Hyderabad", temperature = 30.4, condition = "cloundy",
+                icon = "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+                humidity = 4,
+                uvIndex = 4.2,
+                feelsLike = 3.3
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewSearching() {
+    WeatherAppTestTheme {
+        FragmentSearchingBasicInfo(
+            weather = Weather(
+                city = "Hyderabad", temperature = 30.4, condition = "cloundy",
+                icon = "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+                humidity = 4,
+                uvIndex = 4.2,
+                feelsLike = 3.3
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLoadingDetail() {
+    WeatherAppTestTheme {
+        FragmentLoadingMoreInfo(
+            weather = Weather(
+                city = "Hyderabad", temperature = 30.4, condition = "cloundy",
+                icon = "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+                humidity = 4,
+                uvIndex = 4.2,
+                feelsLike = 3.3
+            )
         )
     }
 }
