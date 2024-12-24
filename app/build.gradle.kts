@@ -83,6 +83,8 @@ dependencies {
     //add dependence for datastore
     implementation(libs.androidx.datastore.preferences)
 
-
+    //add dependence for coin
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
 }
