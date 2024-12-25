@@ -13,4 +13,7 @@ object Dimens {
     val DetailCardWidth = 274.dp
     val DetailCardHeight = 75.dp
     val ResultCardHeight = 117.dp
+    val FullWeight = 1f
+    val SearchBarWidth = 0.85f
+    val SearchResultWidth = 0.9f
 }

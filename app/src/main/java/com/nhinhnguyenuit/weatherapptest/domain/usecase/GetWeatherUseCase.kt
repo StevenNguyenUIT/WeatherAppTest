@@ -1,6 +1,5 @@
 package com.nhinhnguyenuit.weatherapptest.domain.usecase
 
-import com.nhinhnguyenuit.weatherapptest.data.model.WeatherResponse
 import com.nhinhnguyenuit.weatherapptest.data.repository.WeatherRepository
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
 

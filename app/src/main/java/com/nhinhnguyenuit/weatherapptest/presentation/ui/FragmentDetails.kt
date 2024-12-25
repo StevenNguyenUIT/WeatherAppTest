@@ -11,12 +11,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.GraySurface
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
+import com.nhinhnguyenuit.weatherapptest.utils.MockData
 
 @Composable
 fun FragmentDetails(weather: Weather?) {
@@ -25,7 +28,7 @@ fun FragmentDetails(weather: Weather?) {
             .width(Dimens.DetailCardWidth)
             .height(Dimens.DetailCardHeight),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF2F2F2)
+            containerColor = GraySurface
         ),
         shape = RoundedCornerShape(Dimens.RadiusSize)
     ) {
@@ -47,5 +50,15 @@ fun FragmentDetails(weather: Weather?) {
                 addingContent = stringResource(id = R.string.degree)
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLoadingDetail() {
+    WeatherAppTestTheme {
+        FragmentDetails(
+            weather = MockData.weather
+        )
     }
 }

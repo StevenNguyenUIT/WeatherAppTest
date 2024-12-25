@@ -14,12 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
-import com.nhinhnguyenuit.weatherapptest.presentation.viewmodel.WeatherState
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
+import com.nhinhnguyenuit.weatherapptest.utils.MockData
 
 @Composable
 fun FragmentBasic(weather: Weather?) {
@@ -59,5 +61,15 @@ fun FragmentBasic(weather: Weather?) {
                 style = AppStyles.PrimaryText30Style
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewBasic() {
+    WeatherAppTestTheme {
+        FragmentBasic(
+            weather = MockData.weather
+        )
     }
 }

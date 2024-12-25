@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
 import com.nhinhnguyenuit.weatherapptest.domain.usecase.GetWeatherUseCase
 import com.nhinhnguyenuit.weatherapptest.utils.DataStoreManager
@@ -29,7 +30,6 @@ class WeatherViewModel(
     private val _cityState = MutableStateFlow<Boolean>(false)
     val cityState: StateFlow<Boolean> = _cityState
 
-
     init {
         // Fetch city from DataStore on initialization
         viewModelScope.launch {
@@ -47,7 +47,7 @@ class WeatherViewModel(
     fun loadWeather(city: String) {
         viewModelScope.launch {
             if (!NetworkUtils.isInternetAvailable(context)) {
-                _weatherState.value = WeatherState.Error("No internet connection")
+                _weatherState.value = WeatherState.Error(context.getString(R.string.no_internet_connection))
                 return@launch
             }
             try {

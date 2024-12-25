@@ -1,6 +1,5 @@
 package com.nhinhnguyenuit.weatherapptest.domain.model
 
-
 data class Weather(
     val city: String,
     val temperature: Double,

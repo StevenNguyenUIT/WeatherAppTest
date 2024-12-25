@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
 
 @Composable
 fun FragmentLoading(modifier: Modifier) {
@@ -30,3 +32,12 @@ fun FragmentLoading(modifier: Modifier) {
         )
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewNotify() {
+    WeatherAppTestTheme {
+        FragmentLoading(modifier = Modifier.padding(Dimens.LargePadding))
+    }
+}
+

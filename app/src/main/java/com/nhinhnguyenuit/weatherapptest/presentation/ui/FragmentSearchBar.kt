@@ -21,6 +21,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.GraySurface
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.GrayText
 
 @Composable
 fun FragmentSearchBar(
@@ -45,11 +47,11 @@ fun FragmentSearchBar(
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = Color.Transparent,
             focusedBorderColor = Color.Transparent,
-            unfocusedContainerColor = Color(0xFFF2F2F2),
-            focusedContainerColor = Color(0xFFF2F2F2)
+            unfocusedContainerColor = GraySurface,
+            focusedContainerColor = GraySurface
         ),
         modifier = Modifier
-            .fillMaxWidth(0.85f)
+            .fillMaxWidth(Dimens.SearchBarWidth)
             .padding(top = Dimens.XLargePadding),
         trailingIcon = {
             IconButton(onClick = {
@@ -57,7 +59,7 @@ fun FragmentSearchBar(
             }) {
                 Icon(
                     imageVector = Icons.Default.Search, contentDescription = stringResource(R.string.search_describe),
-                    tint = Color(0xFFC4C4C4)
+                    tint = GrayText
                 )
             }
         },
