@@ -33,6 +33,10 @@ class WeatherViewModel(
     init {
         // Fetch city from DataStore on initialization
         viewModelScope.launch {
+            if (!NetworkUtils.isInternetAvailable(context)) {
+                _weatherState.value = WeatherState.Error(context.getString(R.string.no_internet_connection))
+                return@launch
+            }
             val savedCity = dataStoreManager.getCity()
             if (savedCity != null) {
                 _cityState.value = true
