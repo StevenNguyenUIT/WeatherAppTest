@@ -3,4 +3,12 @@
     <string name="search_location">Search Location</string>
     <string name="no_city_selected">No City Selected</string>
     <string name="please_search_for_a_city">Please Search For A City</string>
+    <string name="degree">°</string>
+    <string name="describe_arrow_after_city">arrow after city</string>
+    <string name="describe_image">image</string>
+    <string name="percent">%</string>
+    <string name="humidity_label">Humidity</string>
+    <string name="uv_label">UV</string>
+    <string name="feels_like_label">Feels Like</string>
+    <string name="search_describe">icon search</string>
 </resources>

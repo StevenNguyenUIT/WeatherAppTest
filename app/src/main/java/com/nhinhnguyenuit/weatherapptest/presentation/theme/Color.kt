@@ -13,5 +13,5 @@ val Pink40 = Color(0xFF7D5260)
 val GraySurface = Color(0xFFF2F2F2)
 val GrayText = Color(0xFFC4C4C4)
 val GrayTextBold = Color(0xFF9A9A9A)
-val PrimaryTextBold = Color(0xFF2C2C2C)
+val BlackTextBold = Color(0xFF2C2C2C)
 

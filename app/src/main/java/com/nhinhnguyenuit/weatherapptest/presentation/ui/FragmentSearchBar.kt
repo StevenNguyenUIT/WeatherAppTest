@@ -9,26 +9,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nhinhnguyenuit.weatherapptest.R
-import com.nhinhnguyenuit.weatherapptest.presentation.theme.WeatherAppTestTheme
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
+import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
 
 @Composable
-fun SearchBar(
+fun FragmentSearchBar(
     searchText: TextFieldValue,
     onSearchTextChange: (TextFieldValue) -> Unit,
     onSearchSubmit: () -> Unit
@@ -39,8 +34,7 @@ fun SearchBar(
         placeholder = {
             Text(
                 text = stringResource(R.string.search_location),
-                color = Color(0xFFC4C4C4),
-                style = MaterialTheme.typography.displayMedium
+                style = AppStyles.PrimaryLightGrayTextStyle
             )
         },
         maxLines = 1,
@@ -56,18 +50,18 @@ fun SearchBar(
         ),
         modifier = Modifier
             .fillMaxWidth(0.85f)
-            .padding(top = 50.dp),
+            .padding(top = Dimens.XLargePadding),
         trailingIcon = {
             IconButton(onClick = {
                 onSearchSubmit()
             }) {
                 Icon(
-                    imageVector = Icons.Default.Search, contentDescription = "search",
+                    imageVector = Icons.Default.Search, contentDescription = stringResource(R.string.search_describe),
                     tint = Color(0xFFC4C4C4)
                 )
             }
         },
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(Dimens.RadiusSize)
     )
 }
 
