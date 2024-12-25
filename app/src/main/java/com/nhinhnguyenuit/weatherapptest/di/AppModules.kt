@@ -36,6 +36,9 @@ val dataStoreModule = module {
 
 val viewModelModule = module {
     viewModel {
-        WeatherViewModel(get(), get())
+        WeatherViewModel(
+            getWeatherUseCase = get(),
+            dataStoreManager = get(),
+            androidContext())
     }
 }

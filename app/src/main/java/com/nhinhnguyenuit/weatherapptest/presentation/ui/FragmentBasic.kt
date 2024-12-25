@@ -19,6 +19,7 @@ import com.nhinhnguyenuit.weatherapptest.R
 import com.nhinhnguyenuit.weatherapptest.domain.model.Weather
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.AppStyles
 import com.nhinhnguyenuit.weatherapptest.presentation.theme.Dimens
+import com.nhinhnguyenuit.weatherapptest.presentation.viewmodel.WeatherState
 
 @Composable
 fun FragmentBasic(weather: Weather?) {

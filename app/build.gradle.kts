@@ -87,4 +87,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
+    //add dependence for permission
+    implementation(libs.accompanist.permissions)
+
 }
